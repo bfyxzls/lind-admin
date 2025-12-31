@@ -1,0 +1,84 @@
+# 应用配置
+spring:
+  application:
+    name: lind-admin
+
+  # 数据库配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/lind_admin?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: "123456"
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      auto-commit: true
+      idle-timeout: 30000
+      max-lifetime: 1800000
+      connection-timeout: 30000
+
+  # JPA配置
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+    open-in-view: false
+
+  # Redis配置
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password:
+      database: 0
+      timeout: 10000ms
+      lettuce:
+        pool:
+          min-idle: 0
+          max-idle: 8
+          max-active: 8
+          max-wait: -1ms
+
+  # Freemarker配置
+  freemarker:
+    enabled: true
+    template-loader-path: classpath:/templates/
+    suffix: .ftl
+    charset: UTF-8
+    content-type: text/html
+    check-template-location: true
+    cache: false
+    settings:
+      template_update_delay: 0
+      default_encoding: UTF-8
+      classic_compatible: true
+      number_format: 0.##
+
+  # 开发工具配置
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
+
+# 服务器配置
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    session:
+      timeout: 30m
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.lind.lindadmin: DEBUG
+    org.springframework.security: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
