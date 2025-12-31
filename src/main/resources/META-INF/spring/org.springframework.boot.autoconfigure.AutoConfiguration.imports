@@ -1,0 +1,4 @@
+com.lind.lindadmin.config.JpaConfig
+com.lind.lindadmin.config.PasswordEncoderConfig
+com.lind.lindadmin.config.SecurityConfig
+com.lind.lindadmin.config.WebMvcConfig
