@@ -19,20 +19,21 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler {
 
-    private final ObjectMapper objectMapper;
+	private final ObjectMapper objectMapper;
 
-    @Override
-    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
-                                Authentication authentication) throws IOException, ServletException {
-        // 判断是否是AJAX请求
-        String requestedWith = request.getHeader("X-Requested-With");
-        if ("XMLHttpRequest".equals(requestedWith)) {
-            response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(objectMapper.writeValueAsString(Result.success("退出成功")));
-        } else {
-            // 页面请求，重定向到登录页
-            response.sendRedirect("/login");
-        }
-    }
+	@Override
+	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+			throws IOException, ServletException {
+		// 判断是否是AJAX请求
+		String requestedWith = request.getHeader("X-Requested-With");
+		if ("XMLHttpRequest".equals(requestedWith)) {
+			response.setContentType("application/json;charset=UTF-8");
+			response.getWriter().write(objectMapper.writeValueAsString(Result.success("退出成功")));
+		}
+		else {
+			// 页面请求，重定向到登录页
+			response.sendRedirect("/login");
+		}
+	}
+
 }
-

@@ -16,59 +16,63 @@ import java.util.stream.Collectors;
 @Getter
 public class SecurityUserDetails implements UserDetails {
 
-    private final Long userId;
-    private final String username;
-    private final String password;
-    private final String nickname;
-    private final Integer status;
-    private final Set<String> permissions;
-    private final Collection<? extends GrantedAuthority> authorities;
+	private final Long userId;
 
-    public SecurityUserDetails(User user, Set<String> permissions) {
-        this.userId = user.getId();
-        this.username = user.getUsername();
-        this.password = user.getPassword();
-        this.nickname = user.getNickname();
-        this.status = user.getStatus();
-        this.permissions = permissions;
-        this.authorities = permissions.stream()
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toSet());
-    }
+	private final String username;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
+	private final String password;
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
+	private final String nickname;
 
-    @Override
-    public String getUsername() {
-        return username;
-    }
+	private final Integer status;
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+	private final Set<String> permissions;
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return status == 1;
-    }
+	private final Collection<? extends GrantedAuthority> authorities;
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+	public SecurityUserDetails(User user, Set<String> permissions) {
+		this.userId = user.getId();
+		this.username = user.getUsername();
+		this.password = user.getPassword();
+		this.nickname = user.getNickname();
+		this.status = user.getStatus();
+		this.permissions = permissions;
+		this.authorities = permissions.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
+	}
 
-    @Override
-    public boolean isEnabled() {
-        return status == 1;
-    }
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return authorities;
+	}
+
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	@Override
+	public String getUsername() {
+		return username;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return status == 1;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return status == 1;
+	}
+
 }
-

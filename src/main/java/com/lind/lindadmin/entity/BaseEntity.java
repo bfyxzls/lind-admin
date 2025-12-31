@@ -19,29 +19,29 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @CreatedBy
-    @Column(name = "created_by", length = 50)
-    private String createdBy;
+	@CreatedBy
+	@Column(name = "created_by", length = 50)
+	private String createdBy;
 
-    @CreatedDate
-    @Column(name = "created_time")
-    private LocalDateTime createdTime;
+	@CreatedDate
+	@Column(name = "created_time")
+	private LocalDateTime createdTime;
 
-    @LastModifiedBy
-    @Column(name = "updated_by", length = 50)
-    private String updatedBy;
+	@LastModifiedBy
+	@Column(name = "updated_by", length = 50)
+	private String updatedBy;
 
-    @LastModifiedDate
-    @Column(name = "updated_time")
-    private LocalDateTime updatedTime;
+	@LastModifiedDate
+	@Column(name = "updated_time")
+	private LocalDateTime updatedTime;
 
-    @Column(name = "deleted")
-    private Integer deleted = 0;
+	@Column(name = "deleted")
+	private Integer deleted = 0;
+
 }
-

@@ -14,19 +14,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SystemLogRepository extends JpaRepository<SystemLog, Long> {
 
-    /**
-     * 分页查询系统日志
-     */
-    @Query("SELECT s FROM SystemLog s WHERE " +
-            "(:logType IS NULL OR s.logType = :logType) " +
-            "AND (:logLevel IS NULL OR s.logLevel = :logLevel) " +
-            "AND (:operator IS NULL OR s.operator LIKE %:operator%) " +
-            "ORDER BY s.createdTime DESC")
-    Page<SystemLog> findByConditions(
-            @Param("logType") String logType,
-            @Param("logLevel") String logLevel,
-            @Param("operator") String operator,
-            Pageable pageable
-    );
-}
+	/**
+	 * 分页查询系统日志
+	 */
+	@Query("SELECT s FROM SystemLog s WHERE " + "(:logType IS NULL OR s.logType = :logType) "
+			+ "AND (:logLevel IS NULL OR s.logLevel = :logLevel) "
+			+ "AND (:operator IS NULL OR s.operator LIKE %:operator%) " + "ORDER BY s.createdTime DESC")
+	Page<SystemLog> findByConditions(@Param("logType") String logType, @Param("logLevel") String logLevel,
+			@Param("operator") String operator, Pageable pageable);
 
+}

@@ -13,16 +13,16 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class DictType extends BaseEntity {
 
-    @Column(name = "dict_name", nullable = false, length = 100)
-    private String dictName;
+	@Column(name = "dict_name", nullable = false, length = 100)
+	private String dictName;
 
-    @Column(name = "dict_type", nullable = false, unique = true, length = 100)
-    private String dictType;
+	@Column(name = "dict_type", nullable = false, unique = true, length = 100)
+	private String dictType;
 
-    @Column(name = "status")
-    private Integer status = 1;
+	@Column(name = "status")
+	private Integer status = 1;
 
-    @Column(name = "remark", length = 500)
-    private String remark;
+	@Column(name = "remark", length = 500)
+	private String remark;
+
 }
-

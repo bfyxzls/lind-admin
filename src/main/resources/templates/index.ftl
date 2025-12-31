@@ -45,13 +45,13 @@
             <!-- 侧边栏 -->
             <aside class="sidebar" :class="{ collapsed: isCollapsed }">
                 <el-menu
-                    :default-active="activeMenu"
-                    :collapse="isCollapsed"
-                    :unique-opened="true"
-                    background-color="#1a1c2e"
-                    text-color="rgba(255,255,255,0.7)"
-                    active-text-color="#fff"
-                    @select="handleMenuSelect">
+                        :default-active="activeMenu"
+                        :collapse="isCollapsed"
+                        :unique-opened="true"
+                        background-color="#1a1c2e"
+                        text-color="rgba(255,255,255,0.7)"
+                        active-text-color="#fff"
+                        @select="handleMenuSelect">
                     <template v-for="menu in menus">
                         <!-- 有子菜单 -->
                         <el-submenu v-if="hasVisibleChildren(menu)"
@@ -102,7 +102,7 @@
             <main class="workspace">
                 <!-- 面包屑 -->
                 <div class="breadcrumb-container">
-                    <i class="el-icon-s-fold" 
+                    <i class="el-icon-s-fold"
                        style="cursor: pointer; font-size: 18px; margin-right: 15px;"
                        @click="isCollapsed = !isCollapsed"></i>
                     <el-breadcrumb separator="/">
@@ -113,10 +113,10 @@
 
                 <!-- 页面内容 -->
                 <div class="page-content">
-                    <iframe 
-                        :src="iframeSrc" 
-                        frameborder="0" 
-                        style="width: 100%; height: 100%; border: none;">
+                    <iframe
+                            :src="iframeSrc"
+                            frameborder="0"
+                            style="width: 100%; height: 100%; border: none;">
                     </iframe>
                 </div>
             </main>
@@ -129,119 +129,133 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="/static/js/common.js"></script>
 <script>
-new Vue({
-    el: '#app',
-    data() {
-        return {
-            userInfo: {
-                username: '${user.username!""}',
-                nickname: '${user.nickname!""}'
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                userInfo: {
+                    username: '${user.username!""}',
+                    nickname: '${user.nickname!""}'
+                },
+                menus: [],
+                activeMenu: '/dashboard',
+                breadcrumbs: ['仪表盘'],
+                isCollapsed: false,
+                iframeSrc: '/dashboard'
+            };
+        },
+        created() {
+            this.loadMenus();
+            // 监听来自iframe的导航消息
+            window.addEventListener('message', this.handleIframeMessage);
+        },
+        beforeDestroy() {
+            window.removeEventListener('message', this.handleIframeMessage);
+        },
+        methods: {
+            loadMenus() {
+                // 从服务端获取菜单数据（已在模板中渲染）
+                const menuData = [
+                    <#if menus?? && menus?size gt 0>
+                    <#list menus as menu>
+                    {
+                        id: ${menu.id},
+                        menuName: '${menu.menuName}',
+                        menuNameEn: '${menu.menuNameEn!""}',
+                        path: '${menu.path!""}',
+                        icon: '${menu.icon!"el-icon-menu"}',
+                        menuType: ${menu.menuType!1},
+                        children: [
+                            <#if menu.children?? && menu.children?size gt 0>
+                            <#list menu.children as child>
+                            {
+                                id: ${child.id},
+                                menuName: '${child.menuName}',
+                                path: '${child.path!""}',
+                                icon: '${child.icon!""}',
+                                menuType: ${child.menuType!2},
+                                children: [
+                                    <#if child.children?? && child.children?size gt 0>
+                                    <#list child.children as subChild>
+                                    {
+                                        id: ${subChild.id},
+                                        menuName: '${subChild.menuName}',
+                                        path: '${subChild.path!""}',
+                                        icon: '${subChild.icon!""}',
+                                        menuType: ${subChild.menuType!2}
+                                    }<#if subChild_has_next>,</#if>
+                                    </#list>
+                                    </#if>
+                                ]
+                            }<#if child_has_next>,</#if>
+                            </#list>
+                            </#if>
+                        ]
+                    }<#if menu_has_next>,</#if>
+                    </#list>
+                    </#if>
+                ];
+                this.menus = menuData;
             },
-            menus: [],
-            activeMenu: '/dashboard',
-            breadcrumbs: ['仪表盘'],
-            isCollapsed: false,
-            iframeSrc: '/dashboard'
-        };
-    },
-    created() {
-        this.loadMenus();
-    },
-    methods: {
-        loadMenus() {
-            // 从服务端获取菜单数据（已在模板中渲染）
-            const menuData = [
-                <#if menus?? && menus?size gt 0>
-                <#list menus as menu>
-                {
-                    id: ${menu.id},
-                    menuName: '${menu.menuName}',
-                    menuNameEn: '${menu.menuNameEn!""}',
-                    path: '${menu.path!""}',
-                    icon: '${menu.icon!"el-icon-menu"}',
-                    menuType: ${menu.menuType!1},
-                    children: [
-                        <#if menu.children?? && menu.children?size gt 0>
-                        <#list menu.children as child>
-                        {
-                            id: ${child.id},
-                            menuName: '${child.menuName}',
-                            path: '${child.path!""}',
-                            icon: '${child.icon!""}',
-                            menuType: ${child.menuType!2},
-                            children: [
-                                <#if child.children?? && child.children?size gt 0>
-                                <#list child.children as subChild>
-                                {
-                                    id: ${subChild.id},
-                                    menuName: '${subChild.menuName}',
-                                    path: '${subChild.path!""}',
-                                    icon: '${subChild.icon!""}',
-                                    menuType: ${subChild.menuType!2}
-                                }<#if subChild_has_next>,</#if>
-                                </#list>
-                                </#if>
-                            ]
-                        }<#if child_has_next>,</#if>
-                        </#list>
-                        </#if>
-                    ]
-                }<#if menu_has_next>,</#if>
-                </#list>
-                </#if>
-            ];
-            this.menus = menuData;
-        },
-        hasVisibleChildren(menu) {
-            if (!menu.children || menu.children.length === 0) {
-                return false;
-            }
-            // 检查是否有可见的子菜单（menuType为1或2）
-            return menu.children.some(child => child.menuType === 1 || child.menuType === 2);
-        },
-        handleMenuSelect(path) {
-            if (path && path.startsWith('/')) {
-                this.activeMenu = path;
-                this.iframeSrc = path;
-                this.updateBreadcrumbs(path);
-            }
-        },
-        updateBreadcrumbs(path) {
-            const breadcrumbs = [];
-            const findMenu = (menus, targetPath, parentNames) => {
-                for (const menu of menus) {
-                    if (menu.path === targetPath) {
-                        breadcrumbs.push(...parentNames, menu.menuName);
-                        return true;
-                    }
-                    if (menu.children && menu.children.length > 0) {
-                        if (findMenu(menu.children, targetPath, [...parentNames, menu.menuName])) {
+            hasVisibleChildren(menu) {
+                if (!menu.children || menu.children.length === 0) {
+                    return false;
+                }
+                // 检查是否有可见的子菜单（menuType为1或2）
+                return menu.children.some(child => child.menuType === 1 || child.menuType === 2);
+            },
+            handleMenuSelect(path) {
+                if (path && path.startsWith('/')) {
+                    this.activeMenu = path;
+                    this.iframeSrc = path;
+                    this.updateBreadcrumbs(path);
+                }
+            },
+            updateBreadcrumbs(path) {
+                const breadcrumbs = [];
+                const findMenu = (menus, targetPath, parentNames) => {
+                    for (const menu of menus) {
+                        if (menu.path === targetPath) {
+                            breadcrumbs.push(...parentNames, menu.menuName);
                             return true;
                         }
+                        if (menu.children && menu.children.length > 0) {
+                            if (findMenu(menu.children, targetPath, [...parentNames, menu.menuName])) {
+                                return true;
+                            }
+                        }
                     }
+                    return false;
+                };
+                findMenu(this.menus, path, []);
+                this.breadcrumbs = breadcrumbs.length > 0 ? breadcrumbs : ['首页'];
+            },
+            handleCommand(command) {
+                if (command === 'logout') {
+                    this.$confirm('确定要退出登录吗？', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }).then(() => {
+                        window.location.href = '/logout';
+                    }).catch(() => {});
+                } else if (command === 'profile') {
+                    this.iframeSrc = '/profile';
+                    this.activeMenu = '';
+                    this.breadcrumbs = ['个人中心'];
                 }
-                return false;
-            };
-            findMenu(this.menus, path, []);
-            this.breadcrumbs = breadcrumbs.length > 0 ? breadcrumbs : ['首页'];
-        },
-        handleCommand(command) {
-            if (command === 'logout') {
-                this.$confirm('确定要退出登录吗？', '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    type: 'warning'
-                }).then(() => {
-                    window.location.href = '/logout';
-                }).catch(() => {});
-            } else if (command === 'profile') {
-                this.iframeSrc = '/profile';
-                this.activeMenu = '';
-                this.breadcrumbs = ['个人中心'];
+            },
+            handleIframeMessage(event) {
+                // 处理来自iframe（如dashboard快捷入口）的导航消息
+                if (event.data && event.data.type === 'navigate' && event.data.path) {
+                    const path = event.data.path;
+                    this.activeMenu = path;
+                    this.iframeSrc = path;
+                    this.updateBreadcrumbs(path);
+                }
             }
         }
-    }
-});
+    });
 </script>
 </body>
 </html>

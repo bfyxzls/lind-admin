@@ -22,69 +22,65 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class LogServiceImpl implements LogService {
 
-    private final SystemLogRepository systemLogRepository;
-    private final OperationLogRepository operationLogRepository;
-    private final LoginLogRepository loginLogRepository;
+	private final SystemLogRepository systemLogRepository;
 
-    // ==================== 系统日志 ====================
+	private final OperationLogRepository operationLogRepository;
 
-    @Override
-    public PageResult<SystemLog> findSystemLogPage(String logType, String logLevel, String operator, Integer pageNum, Integer pageSize) {
-        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
-        Page<SystemLog> page = systemLogRepository.findByConditions(
-                logType != null && !logType.isEmpty() ? logType : null,
-                logLevel != null && !logLevel.isEmpty() ? logLevel : null,
-                operator != null && !operator.isEmpty() ? operator : null,
-                pageable
-        );
-        return PageResult.of(page);
-    }
+	private final LoginLogRepository loginLogRepository;
 
-    @Override
-    @Async
-    public void saveSystemLog(SystemLog log) {
-        systemLogRepository.save(log);
-    }
+	// ==================== 系统日志 ====================
 
-    // ==================== 操作日志 ====================
+	@Override
+	public PageResult<SystemLog> findSystemLogPage(String logType, String logLevel, String operator, Integer pageNum,
+			Integer pageSize) {
+		Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+		Page<SystemLog> page = systemLogRepository.findByConditions(
+				logType != null && !logType.isEmpty() ? logType : null,
+				logLevel != null && !logLevel.isEmpty() ? logLevel : null,
+				operator != null && !operator.isEmpty() ? operator : null, pageable);
+		return PageResult.of(page);
+	}
 
-    @Override
-    public PageResult<OperationLog> findOperationLogPage(String module, Integer businessType, String operator, Integer status, Integer pageNum, Integer pageSize) {
-        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
-        Page<OperationLog> page = operationLogRepository.findByConditions(
-                module != null && !module.isEmpty() ? module : null,
-                businessType,
-                operator != null && !operator.isEmpty() ? operator : null,
-                status,
-                pageable
-        );
-        return PageResult.of(page);
-    }
+	@Override
+	@Async
+	public void saveSystemLog(SystemLog log) {
+		systemLogRepository.save(log);
+	}
 
-    @Override
-    @Async
-    public void saveOperationLog(OperationLog log) {
-        operationLogRepository.save(log);
-    }
+	// ==================== 操作日志 ====================
 
-    // ==================== 登录日志 ====================
+	@Override
+	public PageResult<OperationLog> findOperationLogPage(String module, Integer businessType, String operator,
+			Integer status, Integer pageNum, Integer pageSize) {
+		Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+		Page<OperationLog> page = operationLogRepository.findByConditions(
+				module != null && !module.isEmpty() ? module : null, businessType,
+				operator != null && !operator.isEmpty() ? operator : null, status, pageable);
+		return PageResult.of(page);
+	}
 
-    @Override
-    public PageResult<LoginLog> findLoginLogPage(String username, String loginIp, Integer status, Integer pageNum, Integer pageSize) {
-        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
-        Page<LoginLog> page = loginLogRepository.findByConditions(
-                username != null && !username.isEmpty() ? username : null,
-                loginIp != null && !loginIp.isEmpty() ? loginIp : null,
-                status,
-                pageable
-        );
-        return PageResult.of(page);
-    }
+	@Override
+	@Async
+	public void saveOperationLog(OperationLog log) {
+		operationLogRepository.save(log);
+	}
 
-    @Override
-    @Async
-    public void saveLoginLog(LoginLog log) {
-        loginLogRepository.save(log);
-    }
+	// ==================== 登录日志 ====================
+
+	@Override
+	public PageResult<LoginLog> findLoginLogPage(String username, String loginIp, Integer status, Integer pageNum,
+			Integer pageSize) {
+		Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+		Page<LoginLog> page = loginLogRepository.findByConditions(
+				username != null && !username.isEmpty() ? username : null,
+				loginIp != null && !loginIp.isEmpty() ? loginIp : null, status, pageable);
+		return PageResult.of(page);
+	}
+
+	@Override
+	@Async
+	public void saveLoginLog(LoginLog log) {
+		loginLogRepository.save(log);
+	}
+
 }
-

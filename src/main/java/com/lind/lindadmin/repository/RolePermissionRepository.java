@@ -12,24 +12,24 @@ import java.util.List;
 @Repository
 public interface RolePermissionRepository extends JpaRepository<RolePermission, Long> {
 
-    /**
-     * 根据角色ID查询
-     */
-    List<RolePermission> findByRoleId(Long roleId);
+	/**
+	 * 根据角色ID查询
+	 */
+	List<RolePermission> findByRoleId(Long roleId);
 
-    /**
-     * 根据权限ID查询
-     */
-    List<RolePermission> findByPermissionId(Long permissionId);
+	/**
+	 * 根据权限ID查询
+	 */
+	List<RolePermission> findByPermissionId(Long permissionId);
 
-    /**
-     * 根据角色ID删除
-     */
-    void deleteByRoleId(Long roleId);
+	/**
+	 * 根据角色ID删除
+	 */
+	void deleteByRoleId(Long roleId);
 
-    /**
-     * 根据权限ID删除
-     */
-    void deleteByPermissionId(Long permissionId);
+	/**
+	 * 根据权限ID删除
+	 */
+	void deleteByPermissionId(Long permissionId);
+
 }
-

@@ -14,21 +14,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OperationLogRepository extends JpaRepository<OperationLog, Long> {
 
-    /**
-     * 分页查询操作日志
-     */
-    @Query("SELECT o FROM OperationLog o WHERE " +
-            "(:module IS NULL OR o.module = :module) " +
-            "AND (:businessType IS NULL OR o.businessType = :businessType) " +
-            "AND (:operator IS NULL OR o.operator LIKE %:operator%) " +
-            "AND (:status IS NULL OR o.status = :status) " +
-            "ORDER BY o.createdTime DESC")
-    Page<OperationLog> findByConditions(
-            @Param("module") String module,
-            @Param("businessType") Integer businessType,
-            @Param("operator") String operator,
-            @Param("status") Integer status,
-            Pageable pageable
-    );
-}
+	/**
+	 * 分页查询操作日志
+	 */
+	@Query("SELECT o FROM OperationLog o WHERE " + "(:module IS NULL OR o.module = :module) "
+			+ "AND (:businessType IS NULL OR o.businessType = :businessType) "
+			+ "AND (:operator IS NULL OR o.operator LIKE %:operator%) " + "AND (:status IS NULL OR o.status = :status) "
+			+ "ORDER BY o.createdTime DESC")
+	Page<OperationLog> findByConditions(@Param("module") String module, @Param("businessType") Integer businessType,
+			@Param("operator") String operator, @Param("status") Integer status, Pageable pageable);
 
+}

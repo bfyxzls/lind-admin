@@ -12,24 +12,24 @@ import java.util.List;
 @Repository
 public interface UserRoleRepository extends JpaRepository<UserRole, Long> {
 
-    /**
-     * 根据用户ID查询
-     */
-    List<UserRole> findByUserId(Long userId);
+	/**
+	 * 根据用户ID查询
+	 */
+	List<UserRole> findByUserId(Long userId);
 
-    /**
-     * 根据角色ID查询
-     */
-    List<UserRole> findByRoleId(Long roleId);
+	/**
+	 * 根据角色ID查询
+	 */
+	List<UserRole> findByRoleId(Long roleId);
 
-    /**
-     * 根据用户ID删除
-     */
-    void deleteByUserId(Long userId);
+	/**
+	 * 根据用户ID删除
+	 */
+	void deleteByUserId(Long userId);
 
-    /**
-     * 根据角色ID删除
-     */
-    void deleteByRoleId(Long roleId);
+	/**
+	 * 根据角色ID删除
+	 */
+	void deleteByRoleId(Long roleId);
+
 }
-
