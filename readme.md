@@ -28,6 +28,24 @@
 * 前端：freemarker + Vue.js + Element UI
 * 后端：Spring Boot + Spring Security + JPA + MySQL + Redis
 
+## 使用步骤
+添加依赖
+```
+<dependency>
+    <groupId>com.lind</groupId>
+    <artifactId>lind-admin</artifactId>
+    <version>0.0.1</version>
+</dependency>
+```
+配置数据库连接
+```
+spring:  
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/lind_admin?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: "123456"
+```
 ## 系统截图
 系统首页
 ![](./images/580782818742800.png)
