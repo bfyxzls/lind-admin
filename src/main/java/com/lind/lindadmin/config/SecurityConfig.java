@@ -15,6 +15,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 
 /**
  * Spring Security配置
@@ -26,9 +28,13 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final SecurityUserDetailsService userDetailsService;
+
     private final LoginSuccessHandler loginSuccessHandler;
+
     private final LoginFailureHandler loginFailureHandler;
+
     private final LogoutSuccessHandlerImpl logoutSuccessHandler;
+
     private final PasswordEncoder passwordEncoder;
 
     @Bean
@@ -42,8 +48,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // 禁用CSRF（前后端不分离项目通常需要保留，这里为了简化先禁用）
-                .csrf(csrf -> csrf.disable())
+                // 启用CSRF（前后端不分离项目通常需要保留，cookie中会有XSRF-TOKEN，与与服务端的这个值进行对比，防止csrf攻击）
+                .csrf(csrf -> csrf
+                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                        .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler())
+                )
                 // 允许同源iframe嵌入（系统使用iframe加载页面）
                 .headers(headers -> headers
                         .frameOptions(frameOptions -> frameOptions.sameOrigin())
@@ -51,7 +60,8 @@ public class SecurityConfig {
                 // 配置请求授权
                 .authorizeHttpRequests(auth -> auth
                         // 静态资源允许访问
-                        .requestMatchers("/static/**", "/css/**", "/js/**", "/images/**", "/fonts/**", "/favicon.ico").permitAll()
+                        .requestMatchers("/static/**", "/css/**", "/js/**", "/images/**", "/fonts/**", "/favicon.ico")
+                        .permitAll()
                         // 登录页面允许访问
                         .requestMatchers("/login", "/login/**").permitAll()
                         // API字典接口部分开放
