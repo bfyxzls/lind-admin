@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>${title!'Lind后台管理系统'}</title>
     <#-- Element UI CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui@2.15.14/lib/theme-chalk/index.css">
     <#-- 自定义CSS -->
     <link rel="stylesheet" href="/static/css/common.css">
     <#-- 页面自定义CSS -->

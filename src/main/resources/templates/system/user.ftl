@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>用户管理</title>
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui@2.15.14/lib/theme-chalk/index.css">
     <link rel="stylesheet" href="/static/css/common.css">
     <style>[v-cloak] { display: none !important; } body { background: #f0f2f5; }</style>
 </head>
@@ -177,9 +177,9 @@
     </el-dialog>
 </div>
 
-<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/element-ui@2.15.14/lib/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/static/js/common.js"></script>
 <script>
 new Vue({
