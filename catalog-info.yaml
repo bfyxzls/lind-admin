@@ -1,0 +1,24 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: lind-admin  # 组件的唯一名称
+  description: lind小后台-微小的后台  # 组件描述
+  annotations:
+    github.com/project-slug: https://github.com/bfyxzls/lind-admin  # GitHub仓库地址
+  labels:
+    business-unit: backend  # 业务单元标签
+  tags:
+    - java
+    - spring-boot
+    - microservice
+spec:
+  type: service  # 组件类型：service、website、library等
+  lifecycle: production  # 生命周期阶段：experimental、production、deprecated
+  owner: lind  # 负责团队
+  system: backend-system  # 所属系统（可选）
+  domain: lind-domain  # 所属领域（可选）
+  providesApis:
+    - default/user-auth-api  # 提供的API
+  dependsOn:
+    - resource:default/user-database  # 依赖的资源
+    - component:default/notification-service  # 依赖的其他组件
