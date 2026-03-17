@@ -42,6 +42,27 @@ spec:
   system: backend-system  # 所属系统（可选）
   domain: lind-domain  # 所属领域（可选）
   providesApis:
-    - default/pet-store-api-swagger  # 提供的API
+    - lind-admin-grpc-api  # 提供的API
   dependsOn: # 依赖的资源
     - component:default/kc-report
+---
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-api
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: lind-admin-grpc-api
+spec:
+  type: grpc
+  lifecycle: experimental
+  owner: lind
+  system: backend-system
+  definition: |
+    syntax = "proto3";
+
+    service Exampler {
+      rpc Example (ExampleMessage) returns (ExampleMessage) {};
+    }
+
+    message ExampleMessage {
+      string example = 1;
+    };
