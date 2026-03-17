@@ -1,4 +1,28 @@
 apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: backend-system
+spec:
+  owner: lind
+---
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-user
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: lind-user1
+spec:
+  memberOf: [lind]
+---
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-group
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: lind
+spec:
+  type: team
+  children: [lind-user1]
+---
+apiVersion: backstage.io/v1alpha1
 kind: Component # 类型，api,component,group,location,system,user
 metadata:
   name: lind-admin  # 组件的唯一名称
@@ -18,6 +42,6 @@ spec:
   system: backend-system  # 所属系统（可选）
   domain: lind-domain  # 所属领域（可选）
   providesApis:
-    - default/user-auth-api  # 提供的API
-  dependsOn:
-    - resource:example-website
+    - default/pet-store-api-swagger  # 提供的API
+  dependsOn: # 依赖的资源
+    - component:default/kc-report
