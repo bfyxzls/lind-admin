@@ -29,7 +29,7 @@ metadata:
   description: lind小后台-微小的后台  # 组件描述
   annotations:
     github.com/project-slug: https://github.com/bfyxzls/lind-admin  # GitHub仓库地址
-    backstage.io/techdocs-ref: url:https://github.com/bfyxzls/lind-admin/tree/master/docs  # 自动在当前目录进行扫描
+    backstage.io/techdocs-ref: dir:.  # 自动在当前目录进行扫描
   labels:
     business-unit: backend  # 业务单元标签
   tags:
