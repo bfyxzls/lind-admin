@@ -1,9 +1,11 @@
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-group
 apiVersion: backstage.io/v1alpha1
-kind: System
+kind: Group
 metadata:
-  name: backend-system
+  name: lind
 spec:
-  owner: lind
+  type: team
+  children: [lind-user1]
 ---
 # https://backstage.io/docs/features/software-catalog/descriptor-format#kind-user
 apiVersion: backstage.io/v1alpha1
@@ -13,14 +15,12 @@ metadata:
 spec:
   memberOf: [lind]
 ---
-# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-group
 apiVersion: backstage.io/v1alpha1
-kind: Group
+kind: System
 metadata:
-  name: lind
+  name: backend-system
 spec:
-  type: team
-  children: [lind-user1]
+  owner: lind
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component # 类型，api,component,group,location,system,user
@@ -43,8 +43,6 @@ spec:
   domain: lind-domain  # 所属领域（可选）
   providesApis:
     - lind-admin-grpc-api  # 提供的API
-  dependsOn: # 依赖的资源
-    - component:kc-report
 ---
 # https://backstage.io/docs/features/software-catalog/descriptor-format#kind-api
 apiVersion: backstage.io/v1alpha1
