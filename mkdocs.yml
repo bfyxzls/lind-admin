@@ -1,0 +1,10 @@
+site_name: lind-admin
+site_description: lind-admin文档
+site_author: zhangzl
+
+nav:
+  - 项目说明: readme.md
+
+
+plugins:
+  - techdocs-core
