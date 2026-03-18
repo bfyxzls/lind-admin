@@ -3,7 +3,7 @@ site_description: lind-admin文档
 site_author: zhangzl
 
 nav:
-  - 项目说明: index.md
+  - 项目说明: ./docs/index.md
 
 
 plugins:
