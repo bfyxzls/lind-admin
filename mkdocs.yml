@@ -4,6 +4,7 @@ site_author: zhangzl
 
 nav:
   - 项目说明: ./index.md
+  - 测试: ./test.md
   - 2025apisix: ./2025apisix接入文档.xlsx
   - Elasticsearch for Hadoop.epub: ./Elasticsearch for Hadoop.epub
   - TOTP: ./TOTP.pdf
