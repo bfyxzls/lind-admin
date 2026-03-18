@@ -4,10 +4,10 @@ site_author: zhangzl
 
 nav:
   - 项目说明: ./index.md
-  - 2025apisix接入文档.xlsx: ./2025apisix接入文档.xlsx
+  - 2025apisix: ./2025apisix接入文档.xlsx
   - Elasticsearch for Hadoop.epub: ./Elasticsearch for Hadoop.epub
-  - TOTP接入文档.md: ./TOTP.pdf
-  - 刷新token会议后的开发计划.docx: ./刷新token会议后的开发计划.docx
+  - TOTP: ./TOTP.pdf
+  - 刷新token会议后的开发计划: ./刷新token会议后的开发计划.docx
 
 
 plugins:
