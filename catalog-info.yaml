@@ -45,7 +45,7 @@ spec:
   providesApis:
     - lind-admin-grpc-api  # 提供的API
   dependsOn:
-    - component:kc-report
+    - component:keycloak-report
 ---
 # https://backstage.io/docs/features/software-catalog/descriptor-format#kind-api
 apiVersion: backstage.io/v1alpha1
