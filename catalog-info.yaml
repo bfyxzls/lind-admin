@@ -41,7 +41,7 @@ spec:
   lifecycle: production  # 生命周期阶段：experimental、production、deprecated
   owner: lind  # 负责团队
   system: backend-system  # 所属系统（可选）
-  domain: lind-domain  # 所属领域（可选）
+  domain: backend  # 所属领域（可选）
   providesApis:
     - lind-admin-grpc-api  # 提供的API
   dependsOn:
