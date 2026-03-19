@@ -3,6 +3,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
   name: lind
+  namespace: backend
 spec:
   type: team
   children: [lind-user1]
@@ -12,6 +13,7 @@ apiVersion: backstage.io/v1alpha1
 kind: User
 metadata:
   name: lind-user1
+  namespace: backend
 spec:
   memberOf: [lind]
 ---
@@ -19,6 +21,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: backend-system
+  namespace: backend
 spec:
   owner: lind
 ---
@@ -46,13 +49,14 @@ spec:
   providesApis:
     - lind-admin-grpc-api  # 提供的API
   dependsOn:
-    - component:keycloak-report
+    - component:default/keycloak-report
 ---
 # https://backstage.io/docs/features/software-catalog/descriptor-format#kind-api
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
   name: lind-admin-grpc-api
+  namespace: backend
 spec:
   type: grpc
   lifecycle: experimental
