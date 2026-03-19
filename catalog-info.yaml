@@ -30,7 +30,7 @@ metadata:
   annotations:
     github.com/project-slug: https://github.com/bfyxzls/lind-admin  # GitHub仓库地址
     backstage.io/techdocs-ref: dir:.  # 自动在当前目录进行扫描
-    backstage.io/multi-format-docs: dir:.
+    backstage.io/multi-format-docs: '"docs"'
   labels:
     business-unit: backend  # 业务单元标签
   tags:
