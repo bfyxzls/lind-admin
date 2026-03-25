@@ -1,29 +1,10 @@
-# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-group
-apiVersion: backstage.io/v1alpha1
-kind: Group
-metadata:
-  name: lind
-  namespace: backend
-spec:
-  type: team
-  children: []
----
-# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-user
-apiVersion: backstage.io/v1alpha1
-kind: User
-metadata:
-  name: lind-user1
-  namespace: backend
-spec:
-  memberOf: [lind]
----
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: backend-system
   namespace: backend
 spec:
-  owner: lind
+  owner: admin
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component # 类型，api,component,group,location,system,user
