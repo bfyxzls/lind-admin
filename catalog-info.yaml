@@ -24,7 +24,7 @@ metadata:
 spec:
   type: service  # 组件类型：service、website、library等
   lifecycle: production  # 生命周期阶段：experimental、production、deprecated
-  owner: lind  # 负责团队
+  owner: admin  # 负责团队
   system: backend-system  # 所属系统（可选）
   domain: backend  # 所属领域（可选）
   providesApis:
@@ -41,7 +41,7 @@ metadata:
 spec:
   type: grpc
   lifecycle: experimental
-  owner: lind
+  owner: admin
   system: backend-system
   definition: |
     syntax = "proto3";
