@@ -2,7 +2,6 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: backend-system
-  namespace: backend
 spec:
   owner: admin
 ---
@@ -10,7 +9,6 @@ apiVersion: backstage.io/v1alpha1
 kind: Component # 类型，api,component,group,location,system,user
 metadata:
   name: lind-admin  # 组件的唯一名称
-  namespace: backend
   description: lind小后台-微小的后台  # 组件描述
   annotations:
     github.com/project-slug: https://github.com/bfyxzls/lind-admin  # GitHub仓库地址
@@ -37,7 +35,6 @@ apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
   name: lind-admin-grpc-api
-  namespace: backend
 spec:
   type: grpc
   lifecycle: experimental
